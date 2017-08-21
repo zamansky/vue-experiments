@@ -16,9 +16,23 @@ var protect = function(to,from,next){
     if (vue.$store.getters.isAuthenticated){
 	return next();
     } else {
-	return next("/")
+	return next("/signIn")
     }
 };
+
+
+var follow = function(to,from,next){
+    console.log(vue.$store.getters.isAuthenticated);
+    if (vue.$store.getters.isAuthenticated){
+	console.log("FORMO")
+	console.log(from)
+	return next(from);
+    } else {
+	return next("/signIn")
+    }
+};
+
+
 
 var logout = function(to, from, next){
     vue.$store.dispatch('logout');
@@ -29,7 +43,7 @@ var logout = function(to, from, next){
 const routes = [
     {path:'/', component:home},
     {path:'/profile', component:profile,beforeEnter:protect},
-{path:'/signin', component:signIn},
+    {path:'/signin', component:signIn, afterEach:follow},
     {path:'/signup', component:signUp},
     {path:'/logout', beforeEnter:logout}
 ];
