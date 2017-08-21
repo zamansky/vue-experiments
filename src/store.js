@@ -15,5 +15,10 @@ export const store = new Vuex.Store({
 	}
     },
     mutations:{},
-    actions:{}
+    actions:{
+	signIn : function(context,payload){
+	    console.log(payload)
+
+	}
+    }
 });
