@@ -1,8 +1,9 @@
 <template>
     
     <v-card>
+	<v-container>
 	<form>
-	    <v-container>
+	    
             	<v-layout row>
                     <v-flex xs3 offset-xs3>
 			<v-text-field
@@ -28,11 +29,12 @@
 
 		<v-layout row>
                     <v-flex xs3 offset-xs3>
-			<v-btn>Submit</v-btn>
+			<v-btn v-on:click="signIn" >Submit</v-btn>
 		    </v-flex>
 		</v-layout>
-	    </v-container>
-	    </form>
+                
+	</form>
+		    </v-container>
     </v-card>
 </template>
 
@@ -48,7 +50,9 @@
 	 }
      },
      methods: {
-
+	 signIn: function(){
+	     alert("LOGGING");
+	 }
 
      },
      components:{
