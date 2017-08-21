@@ -14,11 +14,23 @@ export const store = new Vuex.Store({
 	    return state.isAuthenticated;
 	}
     },
-    mutations:{},
+    mutations:{
+	signIn: function(state,payload){
+	    state.user=payload;
+	    state.isAuthenticated=true;
+	}
+    },
     actions:{
 	signIn : function(context,payload){
-	    console.log(payload)
 
+            firebase.auth().signInWithEmailAndPassword(payload.email,payload.password)
+		.then(function(r){
+		    console.log(r);
+		    context.commit('signIn',payload)
+		}).catch(function(error){
+		    console.log(error);
+		});
+	    
 	}
     }
 });

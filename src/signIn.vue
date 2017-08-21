@@ -7,10 +7,10 @@
             	<v-layout row>
                     <v-flex xs3 offset-xs3>
 			<v-text-field
-			    v-model="username"
-				     name="username"
-			    label="Username"
-				     id="username"
+			    v-model="email"
+				     name="email"
+			    label="email"
+				     id="email"
 			></v-text-field>
 		    </v-flex>
 		</v-layout>
@@ -45,13 +45,13 @@
      name :'',
      data : function(){
 	 return {
-	     username:'',
+	     email:'',
 	     password:''
 	 }
      },
      methods: {
 	 signIn: function(){
-	     alert("LOGGING");
+             this.$store.dispatch('signIn',{email:this.email,password:this.password})
 	 }
 
      },
