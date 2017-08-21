@@ -1,109 +1,62 @@
 <template>
-  <v-app light>
-    <v-navigation-drawer
-      persistent
-      :mini-variant="miniVariant"
-      :clipped="clipped"
-      v-model="drawer"
-    >
-      <v-list>
-        <v-list-tile 
-          v-for="(item, i) in items"
-          :key="i"
-          value="true"
-        >
-          <v-list-tile-action>
-            <v-icon light v-html="item.icon"></v-icon>
-          </v-list-tile-action>
-          <v-list-tile-content>
-            <v-list-tile-title v-text="item.title"></v-list-tile-title>
-          </v-list-tile-content>
-        </v-list-tile>
-      </v-list>
-    </v-navigation-drawer>
-    <v-toolbar fixed>
-      <v-toolbar-side-icon @click.native.stop="drawer = !drawer"></v-toolbar-side-icon>
-      <v-btn 
-        icon
-        @click.native.stop="miniVariant = !miniVariant"
-      >
-        <v-icon v-html="miniVariant ? 'chevron_right' : 'chevron_left'"></v-icon>
-      </v-btn>
-      <v-btn
-        icon
-        @click.native.stop="clipped = !clipped"
-      >
-        <v-icon>web</v-icon>
-      </v-btn>
-      <v-btn
-        icon
-        @click.native.stop="fixed = !fixed"
-      >
-        <v-icon>remove</v-icon>
-      </v-btn>
-      <v-toolbar-title v-text="title"></v-toolbar-title>
-      <v-spacer></v-spacer>
-      <v-btn
-        icon
-        @click.native.stop="rightDrawer = !rightDrawer"
-      >
-        <v-icon>menu</v-icon>
-      </v-btn>
-    </v-toolbar>
+    <v-app light>
+        
+      <v-toolbar fixed>
+	  <v-toolbar-title>My App</v-toolbar-title>
+
+	  <v-spacer></v-spacer>
+	  <v-toolbar-items class="hidden-xs-only">
+              <v-btn
+		  flat
+		  v-for="item in menuItems"
+		  :key="item.title"
+		  :to="item.link">
+		  <v-icon left dark>{{ item.icon }}</v-icon>
+		  {{ item.title }}
+
+              </v-btn>
+	  </v-toolbar-items>
+      </v-toolbar>
     <main>
-      <v-container fluid>
-        <v-slide-y-transition mode="out-in">
-          <v-layout column align-center>
-            <img src="/public/v.png" alt="Vuetify.js" class="mb-5" />
-            <blockquote>
-              &#8220;First, solve the problem. Then, write the code.&#8221;
-              <footer>
-                <small>
-                  <em>&mdash;John Johnson</em>
-                </small>
-              </footer>
-            </blockquote>
-          </v-layout>
-        </v-slide-y-transition>
-      </v-container>
+        	<router-view></router-view>
     </main>
-    <v-navigation-drawer
-      temporary
-      :right="right"
-      v-model="rightDrawer"
-    >
-      <v-list>
-        <v-list-tile @click.native="right = !right">
-          <v-list-tile-action>
-            <v-icon light>compare_arrows</v-icon>
-          </v-list-tile-action>
-          <v-list-tile-title>Switch drawer (click me)</v-list-tile-title>
-        </v-list-tile>
-      </v-list>
-    </v-navigation-drawer>
-    <v-footer :fixed="fixed">
-      <span>&copy; 2017</span>
-    </v-footer>
   </v-app>
 </template>
 
 <script>
-  export default {
-    data () {
-      return {
-        clipped: false,
-        drawer: true,
-        fixed: false,
-        items: [
-          { icon: 'bubble_chart', title: 'Inspire' }
-        ],
-        miniVariant: false,
-        right: true,
-        rightDrawer: false,
-        title: 'Vuetify.js'
-      }
-    }
-  }
+
+import * as firebase from 'firebase'
+
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyCt3oUm6fKqQtXfkeWS6r2yZmJLtaYDqlk",
+    authDomain: "vue-test-project-67035.firebaseapp.com",
+    databaseURL: "https://vue-test-project-67035.firebaseio.com",
+    projectId: "vue-test-project-67035",
+    storageBucket: "vue-test-project-67035.appspot.com",
+    messagingSenderId: "571176538810"
+  };
+  firebase.initializeApp(config);
+    
+
+ 
+ export default {
+     created:function() {
+
+     },
+     computed : {
+	 menuItems: function(){
+	     return [
+		  {icon: 'home', title: 'Home', link: '/'},
+ {icon: 'person', title: 'Profile', link: '/profile'},
+		 {icon: 'face', title: 'Sign up', link: '/signup'},
+{icon: 'lock_open', title: 'Sign in', link: '/signin'}
+	     ];
+	 }
+
+     }
+ }
+
 </script>
 
 <style lang="stylus">
