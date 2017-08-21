@@ -56,7 +56,8 @@
 		 console.log("HELLO WORLD")
 		 console.log(self.$store.getters.isAuthenticated);
                  if (self.$store.getters.isAuthenticated){
-		     self.$router.push("/profile")
+		     self.$router.push("/");
+		     
 		 }
 	     })
                        

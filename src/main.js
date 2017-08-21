@@ -8,11 +8,15 @@ import home from './home.vue'
 import profile from './profile.vue'
 import signIn from './signIn.vue'
 import signUp from './signUp.vue'
+import dummy from './dummy.vue'
 
 
 
 var protect = function(to,from,next){
     console.log(vue.$store.getters.isAuthenticated);
+    console.log(to.fullPath);
+    console.log(from);
+    
     if (vue.$store.getters.isAuthenticated){
 	return next();
     } else {
@@ -20,17 +24,6 @@ var protect = function(to,from,next){
     }
 };
 
-
-var follow = function(to,from,next){
-    console.log(vue.$store.getters.isAuthenticated);
-    if (vue.$store.getters.isAuthenticated){
-	console.log("FORMO")
-	console.log(from)
-	return next(from);
-    } else {
-	return next("/signIn")
-    }
-};
 
 
 
@@ -43,7 +36,8 @@ var logout = function(to, from, next){
 const routes = [
     {path:'/', component:home},
     {path:'/profile', component:profile,beforeEnter:protect},
-    {path:'/signin', component:signIn, afterEach:follow},
+    {path:'/dummy', component:dummy,beforeEnter:protect},
+    {path:'/signin', component:signIn},
     {path:'/signup', component:signUp},
     {path:'/logout', beforeEnter:logout}
 ];

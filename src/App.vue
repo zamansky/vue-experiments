@@ -48,10 +48,11 @@ import * as firebase from 'firebase'
 	 menuItems: function(){
 	     return [
 		 {icon: 'home', title: 'Home', link: '/'},
+                 {icon: 'bug_report', title: 'Dummy', link: '/dummy'},
                  {icon: 'person', title: 'Profile', link: '/profile'},
-                 {icon: 'face', title: 'Sign up', link: '/signup'},
+		 {icon: 'face', title: 'Sign up', link: '/signup'},
                  {icon: 'lock_open', title: 'Sign in', link: '/signin'},
-		 {icon: 'lock_close', title: 'Logout', link: '/logout'}
+		 {icon:'', title: 'Logout', link: '/logout'}
                  
 	     ];
 	 }
