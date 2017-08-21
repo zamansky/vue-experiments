@@ -9,20 +9,29 @@ import profile from './profile.vue'
 import signIn from './signIn.vue'
 import signUp from './signUp.vue'
 
+
+
 var protect = function(to,from,next){
-    if (vue.$store.isAuthenticated){
+    console.log(vue.$store.getters.isAuthenticated);
+    if (vue.$store.getters.isAuthenticated){
 	return next();
     } else {
 	return next("/")
     }
-}
+};
+
+var logout = function(to, from, next){
+    vue.$store.dispatch('logout');
+    return next('/');
+};
 
 
 const routes = [
     {path:'/', component:home},
     {path:'/profile', component:profile,beforeEnter:protect},
 {path:'/signin', component:signIn},
-    {path:'/signup', component:signUp}
+    {path:'/signup', component:signUp},
+    {path:'/logout', beforeEnter:logout}
 ];
 
 

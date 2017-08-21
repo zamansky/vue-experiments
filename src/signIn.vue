@@ -51,7 +51,15 @@
      },
      methods: {
 	 signIn: function(){
-             this.$store.dispatch('signIn',{email:this.email,password:this.password})
+	     var self=this;
+             this.$store.dispatch('signIn',{email:this.email,password:this.password}).then(function(d){
+		 console.log("HELLO WORLD")
+		 console.log(self.$store.getters.isAuthenticated);
+                 if (self.$store.getters.isAuthenticated){
+		     self.$router.push("/profile")
+		 }
+	     })
+                       
 	 }
 
      },

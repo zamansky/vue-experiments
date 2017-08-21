@@ -1,13 +1,13 @@
 <template>
     <v-app light>
         
-      <v-toolbar fixed>
+	<v-toolbar light fixed>
+	    
 	  <v-toolbar-title>My App</v-toolbar-title>
 
 	  <v-spacer></v-spacer>
 	  <v-toolbar-items class="hidden-xs-only">
               <v-btn
-		  flat
 		  v-for="item in menuItems"
 		  :key="item.title"
 		  :to="item.link">
@@ -47,10 +47,12 @@ import * as firebase from 'firebase'
      computed : {
 	 menuItems: function(){
 	     return [
-		  {icon: 'home', title: 'Home', link: '/'},
- {icon: 'person', title: 'Profile', link: '/profile'},
-		 {icon: 'face', title: 'Sign up', link: '/signup'},
-{icon: 'lock_open', title: 'Sign in', link: '/signin'}
+		 {icon: 'home', title: 'Home', link: '/'},
+                 {icon: 'person', title: 'Profile', link: '/profile'},
+                 {icon: 'face', title: 'Sign up', link: '/signup'},
+                 {icon: 'lock_open', title: 'Sign in', link: '/signin'},
+		 {icon: 'lock_close', title: 'Logout', link: '/logout'}
+                 
 	     ];
 	 }
 
