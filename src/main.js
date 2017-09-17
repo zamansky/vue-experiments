@@ -10,7 +10,7 @@ import signIn from './signIn.vue'
 import signUp from './signUp.vue'
 import dummy from './dummy.vue'
 
-
+Vue.use(Vuetify);
 
 var protect = function(to,from,next){
     console.log(vue.$store.getters.isAuthenticated);

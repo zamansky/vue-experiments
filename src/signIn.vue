@@ -3,8 +3,18 @@
     <v-card>
 	<v-container>
 	<form>
-	    
-            	<v-layout row>
+
+	    <v-layout row>
+		<v-flex xs3 offset-xs3>
+		    <v-btn v-on:click="loginGoogle">
+			Login with Google
+		    </v-btn>
+
+		</v-flex>
+	    </v-layout>
+
+
+	    <v-layout row>
                     <v-flex xs3 offset-xs3>
 			<v-text-field
 			    v-model="email"
@@ -40,6 +50,7 @@
 
 
 <script>
+import * as firebase from 'firebase'
 
  export default {
      name :'',
@@ -61,6 +72,34 @@
 		 }
 	     })
                        
+	 },
+	 loginGoogle: function(){
+	     var self=this;
+	     var provider = new firebase.auth.GoogleAuthProvider();
+	     firebase.auth().signInWithPopup(provider).then(function(result) {
+  // This gives you a Google Access Token. You can use it to access the Google API.
+		 var token = result.credential.accessToken;
+		 // The signed-in user info.
+		     var user = result.user;
+		 console.log(user.email);
+		 console.log("About to dispatch")
+		 self.$store.dispatch("signInGoogle",{email:user.email,password:""}).then(function(d){
+		     console.log("disaptchdone")
+		     if (self.$store.getters.isAuthenticated){
+		     self.$router.push("/")};
+		 });
+		 
+	     }).catch(function(error) {
+                 console.log("ERROR")
+		     var errorCode = error.code;
+		 var errorMessage = error.message;
+		 // The email of the user's account used.
+		     var email = error.email;
+		 // The firebase.auth.AuthCredential type <th></th>at was used.
+		     var credential = error.credential;
+                 
+	     });
+
 	 }
 
      },

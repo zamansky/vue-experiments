@@ -25,6 +25,11 @@ export const store = new Vuex.Store({
 	}
     },
     actions:{
+	signInGoogle: function(context,payload){
+	    console.log("GOOGLEIN")
+	    context.commit('signIn',payload)
+	    
+	},
 	signIn : function(context,payload){
             return new Promise((resolve,reject)=>{
             firebase.auth().signInWithEmailAndPassword(payload.email,payload.password)
